@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidación de Prestaciones Laborales - El Salvador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #1e3a8a;
+            --color-secondary: #3b82f6;
+            --color-accent: #dc2626;
+            --color-success: #16a34a;
+            --color-warning: #ea580c;
+            --color-light: #f8fafc;
+            --color-border: #cbd5e1;
+            --color-text: #1e293b;
+            --color-text-light: #64748b;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--color-text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .header-subtitle {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px 30px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--color-secondary);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 0.95em;
+        }
+
+        label .required {
+            color: var(--color-accent);
+            margin-left: 4px;
+        }
+
+        input, select, textarea {
+            padding: 12px 14px;
+            border: 2px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        input:hover, select:hover {
+            border-color: var(--color-secondary);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-warning {
+            background: var(--color-warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #c2410c;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-reset {
+            background: #9ca3af;
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-reset:hover {
+            background: #6b7280;
+        }
+
+        .results-section {
+            background: var(--color-light);
+            border-radius: 8px;
+            padding: 30px;
+            border: 2px solid var(--color-border);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .results-header h2 {
+            color: var(--color-primary);
+            font-size: 1.4em;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .export-buttons button {
+            padding: 10px 18px;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--color-secondary);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            color: var(--color-text);
+        }
+
+        .info-box.warning {
+            background: #fef3c7;
+            border-left-color: var(--color-warning);
+            color: #92400e;
+        }
+
+        .info-box.error {
+            background: #fee2e2;
+            border-left-color: var(--color-accent);
+            color: #991b1b;
+        }
+
+        .info-box.success {
+            background: #f0fdf4;
+            border-left-color: var(--color-success);
+            color: #166534;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        th {
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .amount {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .amount-highlight {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .summary-box {
+            background: white;
+            border: 2px solid var(--color-primary);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 0.95em;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: var(--color-accent);
+            padding: 15px 0;
+            border-top: 2px solid var(--color-primary);
+            margin-top: 10px;
+        }
+
+        .summary-label {
+            color: var(--color-text-light);
+        }
+
+        .summary-value {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 1200px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px 15px;
+                gap: 20px;
+            }
+
+            .export-buttons {
+                flex-direction: column;
+            }
+
+            .export-buttons button {
+                width: 100%;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .print-only {
+                display: block;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            .header {
+                page-break-after: avoid;
+            }
+
+            .content {
+                padding: 20px;
+                display: block;
+            }
+
+            .form-section {
+                display: none;
+            }
+
+            .results-section {
+                background: white;
+                border: 1px solid #ccc;
+                padding: 20px;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            .summary-box {
+                page-break-inside: avoid;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid var(--color-secondary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success {
+            background: var(--color-success);
+        }
+
+        .notification.error {
+            background: var(--color-accent);
+        }
+
+        .notification.warning {
+            background: var(--color-warning);
+        }
+
+        .section-divider {
+            grid-column: 1 / -1;
+            height: 1px;
+            background: var(--color-border);
+            margin: 20px 0;
+        }
+
+        .calculation-detail {
+            font-size: 0.85em;
+            color: var(--color-text-light);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .pdf-document {
+            background: white;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+
+        .pdf-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+        }
+
+        .pdf-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pdf-section {
+            margin-bottom: 20px;
+        }
+
+        .pdf-section-title {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Liquidación de Prestaciones Laborales</h1>
+            <p>República de El Salvador</p>
+            <p class="header-subtitle">Conforme al Código de Trabajo Decreto N° 15 (1972)</p>
+        </div>
+
+        <div class="content">
+            <!-- FORMULARIO -->
+            <div class="form-section">
+                <h2 class="section-title">Datos de Entrada</h2>
+
+                <!-- DATOS PERSONALES -->
+                <div>
+                    <h3 style="color: var(--color-primary); font-size: 1.1em; margin-bottom: 15px;">Datos de la Persona Trabajadora</h3>
+                    <div class="form-group">
+                        <label>Nombre Completo <span class="required">*</span></label>
+                        <input type="text" id="nombreTrabajador" placeholder="Ej: Roberto Alfredo Aguilar Bonilla" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>DUI <span class="required">*</span></label>
+                            <input type="text" id="dui" placeholder="Ej: 00000000-0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Cargo <span class="required">*</span></label>
+                            <input type="text" id="cargo" placeholder="Ej: Ingeniero de Software" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DATOS DEL EMPLEADOR -->
+                <div>
+                    <h3 style="color: var(--color-primary); font-size: 1.1em; margin-bottom: 15px;">Datos del Empleador</h3>
+                    <div class="form-group">
+                        <label>Nombre de la Empresa <span class="required">*</span></label>
+                        <input type="text" id="empresaNombre" placeholder="Ej: Orion Software" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="empresaTel" placeholder="Ej: 2299-9999">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo</label>
+                            <input type="email" id="empresaEmail" placeholder="contacto@empresa.com">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DATOS LABORALES -->
+                <div>
+                    <h3 style="color: var(--color-primary); font-size: 1.1em; margin-bottom: 15px;">Información Laboral</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Salario Mensual (USD) <span class="required">*</span></label>
+                            <input type="number" id="salarioMensual" placeholder="4000.00" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de Ingreso <span class="required">*</span></label>
+                            <input type="date" id="fechaIngreso" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Fecha de Terminación <span class="required">*</span></label>
+                            <input type="date" id="fechaTerminacion" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Causa de Terminación <span class="required">*</span></label>
+                            <select id="causaTerminacion" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="despido">Despido sin causa justificada</option>
+                                <option value="renuncia">Renuncia voluntaria</option>
+                                <option value="mutual">Mutuo consentimiento</option>
+                                <option value="jubilacion">Jubilación</option>
+                                <option value="muerte">Por causa de muerte</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRESTACIONES TRABAJADAS -->
+                <div>
+                    <h3 style="color: var(--color-primary); font-size: 1.1em; margin-bottom: 15px;">Prestaciones Laboradas Después de Último Pago</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Horas Extras Diurnas</label>
+                            <input type="number" id="horasExtrasDiurnas" placeholder="0" step="0.5" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Horas Extras Nocturnas</label>
+                            <input type="number" id="horasExtrasNocturnas" placeholder="0" step="0.5" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Días de Asueto Laborados</label>
+                            <input type="number" id="diasAsueto" placeholder="0" step="0.5" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Días de Descanso Semanal Laborados</label>
+                            <input type="number" id="diasDescansoSemanal" placeholder="0" step="0.5" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÚLTIMOS PAGOS -->
+                <div>
+                    <h3 style="color: var(--color-primary); font-size: 1.1em; margin-bottom: 15px;">Últimas Prestaciones Pagadas</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Última Fecha de Pago de Aguinaldo</label>
+                            <input type="date" id="ultimoAguinaldo">
+                        </div>
+                        <div class="form-group">
+                            <label>Últimas Vacaciones (Desde)</label>
+                            <input type="date" id="ultimasVacacionesDesde">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Últimas Vacaciones (Hasta)</label>
+                            <input type="date" id="ultimasVacacionesHasta">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OBSERVACIONES -->
+                <div class="form-group form-group-full">
+                    <label>Observaciones Adicionales</label>
+                    <textarea id="observaciones" placeholder="Notas o comentarios adicionales..."></textarea>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="button-group">
+                    <button type="button" class="btn-primary" onclick="calcularPrestaciones()">
+                        Calcular Prestaciones
+                    </button>
+                    <button type="button" class="btn-warning" onclick="limpiarFormulario()">
+                        Limpiar Formulario
+                    </button>
+                </div>
+            </div>
+
+            <!-- RESULTADOS -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>Resultado del Cálculo</h2>
+                    <div class="export-buttons">
+                        <button class="btn-secondary" onclick="exportarPDF()" title="Descargar como PDF">
+                            Descargar PDF
+                        </button>
+                        <button class="btn-secondary" onclick="imprimirResultados()" title="Imprimir">
+                            Imprimir
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-box" id="infoCalculos">
+                    Antiedad laboral reconocida: <strong id="antiguedadTexto">0 años</strong>
+                </div>
+
+                <h3 style="color: var(--color-primary); margin-top: 25px; margin-bottom: 15px; font-size: 1.2em;">Desglose de Prestaciones</h3>
+                <div class="table-container">
+                    <table id="tablaResultados">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Base Legal</th>
+                                <th class="text-right">Monto (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="color: var(--color-primary); margin-top: 25px; margin-bottom: 15px; font-size: 1.2em;">Resumen Financiero</h3>
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span class="summary-label">Total Devengado (Bruto):</span>
+                        <span class="summary-value" id="totalDevengado">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Cotización ISSS (Trabajador):</span>
+                        <span class="summary-value" id="cotizacionISS">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Cotización AFP (Trabajador):</span>
+                        <span class="summary-value" id="cotizacionAFP">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Retención ISR:</span>
+                        <span class="summary-value" id="retencionISR">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Total Deducciones:</span>
+                        <span class="summary-value" id="totalDeducciones">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>MONTO NETO A PAGAR:</span>
+                        <span id="montoNeto">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="info-box success" style="margin-top: 20px;">
+                    <strong>Nota:</strong> Este comprobante es informativo. Conforme al Art. 402 inciso 2 del Código de Trabajo, el finiquito solo tiene valor probatorio si consta en hojas expedidas por la Dirección General de Inspección de Trabajo, Jueces o documento privado autenticado ante notario.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONSTANTES Y CONFIGURACIÓN
+        const CONFIG = {
+            SALARIO_DIARIO_CONSTANTE: 30,
+            SALARIO_ANUAL_CONSTANTE: 360,
+            AUMENTO_HORA_NOCTURNA: 1.25,
+            AUMENTO_HORA_EXTRA: 2,
+            AUMENTO_ASUETO: 2,
+            AUMENTO_DESCANSO_SEMANAL: 1.5,
+            AUMENTO_VACACIONES: 1.3,
+            DIAS_VACACION_MINIMO: 15,
+            ANTIGUEDAD_DIAS_MINIMO: 730,
+            TASA_ISSS: 0.03,
+            TASA_AFP: 0.0725,
+            SALARIO_MINIMO_ISR: 1833.33
+        };
+
+        const ANTIGUEDAD_AGUINALDO = [
+            { minimos: 0, maximos: 3, dias: 15 },
+            { minimos: 3, maximos: 10, dias: 19 },
+            { minimos: 10, maximos: Infinity, dias: 21 }
+        ];
+
+        // UTILIDADES
+        function formatoMoneda(valor) {
+            return new Intl.NumberFormat('es-SV', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(valor);
+        }
+
+        function formatoNumero(valor, decimales = 2) {
+            return valor.toFixed(decimales);
+        }
+
+        function obtenerDiferenciaFechas(fechaInicio, fechaFin) {
+            const inicio = new Date(fechaInicio);
+            const fin = new Date(fechaFin);
+            const diferencia = fin - inicio;
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            
+            const años = Math.floor(dias / 365);
+            const meses = Math.floor((dias % 365) / 30);
+            const diasRestantes = dias % 30;
+            
+            return {
+                dias: dias,
+                años: años,
+                meses: meses,
+                diasRestantes: diasRestantes,
+                diasTotales: dias,
+                diasComerciales: Math.floor(dias / 30) * 30,
+                anosComerciales: Math.floor(dias / 360)
+            };
+        }
+
+        function calcularSalarioDiario(salarioMensual) {
+            return salarioMensual / CONFIG.SALARIO_DIARIO_CONSTANTE;
+        }
+
+        function obtenerCategoriaAguinaldo(años) {
+            for (let categoria of ANTIGUEDAD_AGUINALDO) {
+                if (años >= categoria.minimos && años < categoria.maximos) {
+                    return categoria.dias;
+                }
+            }
+            return ANTIGUEDAD_AGUINALDO[ANTIGUEDAD_AGUINALDO.length - 1].dias;
+        }
+
+        // CÁLCULOS PRINCIPALES
+        function calcularPrestaciones() {
+            // VALIDACIÓN
+            if (!validarFormulario()) return;
+
+            // OBTENER DATOS
+            const datos = obtenerDatosFormulario();
+            
+            // CALCULAR ANTIEDAD
+            const diferencia = obtenerDiferenciaFechas(datos.fechaIngreso, datos.fechaTerminacion);
+            
+            // CREAR OBJETO DE RESULTADOS
+            const resultados = {
+                trabajador: datos.nombreTrabajador,
+                empresa: datos.empresaNombre,
+                dui: datos.dui,
+                cargo: datos.cargo,
+                salarioMensual: datos.salarioMensual,
+                salarioDiario: calcularSalarioDiario(datos.salarioMensual),
+                fechaIngreso: datos.fechaIngreso,
+                fechaTerminacion: datos.fechaTerminacion,
+                antiguedad: diferencia,
+                causaTerminacion: datos.causaTerminacion,
+                prestaciones: {},
+                totales: {}
+            };
+
+            // CALCULAR PRESTACIONES
+            calcularIndemnizacion(resultados);
+            calcularVacacionesProporcionales(resultados, datos);
+            calcularAguinaldoProporcional(resultados, datos);
+            calcularHorasExtras(resultados, datos);
+            calcularAsueto(resultados, datos);
+            calcularDescansoSemanal(resultados, datos);
+
+            // CALCULAR TOTALES
+            calcularTotales(resultados);
+
+            // MOSTRAR RESULTADOS
+            mostrarResultados(resultados);
+
+            // Notificación
+            mostrarNotificacion('Cálculo realizado exitosamente', 'success');
+        }
+
+        function calcularIndemnizacion(resultados) {
+            const salarioDiario = resultados.salarioDiario;
+            const años = resultados.antiguedad.años;
+            const meses = resultados.antiguedad.meses;
+            const diasRestantes = resultados.antiguedad.diasRestantes;
+
+            let monto = 0;
+
+            if (resultados.causaTerminacion === 'despido') {
+                // Art. 58: 30 días de salario por año
+                monto = salarioDiario * 30 * años;
+                
+                // Agregar proporcional por meses
+                if (meses > 0 || diasRestantes > 0) {
+                    const diasAdicionles = (meses * 30) + diasRestantes;
+                    const montoProporcional = (salarioDiario * 30 / 30) * diasAdicionles;
+                    monto += montoProporcional;
+                }
+
+                resultados.prestaciones.indemnizacion = {
+                    monto: monto,
+                    baseLegal: 'Art. 58 CT',
+                    descripcion: 'Indemnización por despido injustificado'
+                };
+            } else if (resultados.causaTerminacion === 'renuncia') {
+                // Ley de Prestación por Renuncia: 15 días por año
+                const diasRenuncia = 15;
+                monto = salarioDiario * diasRenuncia * años;
+
+                if (meses > 0 || diasRestantes > 0) {
+                    const diasAdicionales = (meses * 30) + diasRestantes;
+                    const montoProporcional = (salarioDiario * diasRenuncia / 30) * diasAdicionales;
+                    monto += montoProporcional;
+                }
+
+                resultados.prestaciones.indemnizacion = {
+                    monto: monto,
+                    baseLegal: 'Ley de Prestación por Renuncia',
+                    descripcion: 'Prestación económica por renuncia voluntaria'
+                };
+            }
+        }
+
+        function calcularVacacionesProporcionales(resultados, datos) {
+            const salarioDiario = resultados.salarioDiario;
+            const años = resultados.antiguedad.años;
+            const meses = resultados.antiguedad.meses;
+            const diasRestantes = resultados.antiguedad.diasRestantes;
+            const ultimasVacacionesDesde = datos.ultimasVacacionesDesde;
+            const ultimasVacacionesHasta = datos.ultimasVacacionesHasta;
+
+            let diasVacacionPendientes = 0;
+
+            // Si tiene menos de 1 año de servicio, no hay vacaciones
+            if (años === 0 && meses === 0) {
+                resultados.prestaciones.vacacionesProporcionales = {
+                    monto: 0,
+                    baseLegal: 'Arts. 177 y 187 CT',
+                    descripcion: 'Vacaciones proporcionales'
+                };
+                return;
+            }
+
+            // Calcular vacaciones completas (15 días base + 30% adicional)
+            const diasVacacionCompletos = CONFIG.DIAS_VACACION_MINIMO;
+            const montoVacacionCompletas = salarioDiario * diasVacacionCompletos;
+            const aumentoVacaciones = montoVacacionCompletas * (CONFIG.AUMENTO_VACACIONES - 1);
+            const totalVacacionCompleta = montoVacacionCompletas + aumentoVacaciones;
+
+            // Calcular desde la última vez que tomó vacaciones
+            if (ultimasVacacionesHasta) {
+                const diasDesdeUltimas = obtenerDiferenciaFechas(ultimasVacacionesHasta, datos.fechaTerminacion).dias;
+                
+                // Vacaciones acumuladas después de último disfrute
+                const mesesDesdeUltimas = diasDesdeUltimas / 30;
+                diasVacacionPendientes = (CONFIG.DIAS_VACACION_MINIMO / 12) * mesesDesdeUltimas;
+            } else {
+                // No se tienen registradas vacaciones, calcular sobre todo el tiempo
+                diasVacacionPendientes = (CONFIG.DIAS_VACACION_MINIMO / 12) * (años * 12 + meses);
+            }
+
+            // Asegurar mínimo
+            if (diasVacacionPendientes < CONFIG.DIAS_VACACION_MINIMO && (años > 0 || meses >= 1)) {
+                diasVacacionPendientes = CONFIG.DIAS_VACACION_MINIMO;
+            }
+
+            const montoVacacionBase = salarioDiario * diasVacacionPendientes;
+            const montoAumentoVacacion = montoVacacionBase * (CONFIG.AUMENTO_VACACIONES - 1);
+            const montoTotal = montoVacacionBase + montoAumentoVacacion;
+
+            resultados.prestaciones.vacacionesProporcionales = {
+                monto: montoTotal,
+                baseLegal: 'Arts. 177 y 187 CT',
+                descripcion: 'Vacaciones proporcionales',
+                desglose: `${diasVacacionPendientes.toFixed(1)} días a ${CONFIG.AUMENTO_VACACIONES}x`
+            };
+        }
+
+        function calcularAguinaldoProporcional(resultados, datos) {
+            const salarioDiario = resultados.salarioDiario;
+            const años = resultados.antiguedad.años;
+            const meses = resultados.antiguedad.meses;
+            const diasRestantes = resultados.antiguedad.diasRestantes;
+            const ultimoAguinaldo = datos.ultimoAguinaldo;
+
+            let diasAguinaldo = obtenerCategoriaAguinaldo(años);
+            let montoAguinaldo = 0;
+
+            // Calcular aguinaldo completo para la categoría
+            const montoAguinaldoCompleto = salarioDiario * diasAguinaldo;
+
+            // Calcular desde la última vez que se pagó aguinaldo
+            if (ultimoAguinaldo) {
+                const diasDesdeUltimo = obtenerDiferenciaFechas(ultimoAguinaldo, datos.fechaTerminacion).dias;
+                const diasAguinaldoAcumulados = (diasAguinaldo / 360) * diasDesdeUltimo;
+                montoAguinaldo = salarioDiario * diasAguinaldoAcumulados;
+            } else {
+                // No se tiene registro, calcular desde fecha de ingreso
+                montoAguinaldo = (montoAguinaldoCompleto / 12) * (años * 12 + meses);
+            }
+
+            resultados.prestaciones.aguinaldoProporcional = {
+                monto: montoAguinaldo,
+                baseLegal: 'Arts. 196-198 CT',
+                descripcion: 'Aguinaldo proporcional',
+                diasAplicables: diasAguinaldo
+            };
+        }
+
+        function calcularHorasExtras(resultados, datos) {
+            const salarioDiario = resultados.salarioDiario;
+            const salarioHorario = salarioDiario / 8; // Jornada de 8 horas
+
+            let montoHorasExtrasDiurnas = 0;
+            let montoHorasExtrasNocturnas = 0;
+
+            // Horas extras diurnas: 100% recargo (2x)
+            if (datos.horasExtrasDiurnas > 0) {
+                montoHorasExtrasDiurnas = salarioHorario * datos.horasExtrasDiurnas * CONFIG.AUMENTO_HORA_EXTRA;
+            }
+
+            // Horas extras nocturnas: 100% recargo sobre 125%
+            if (datos.horasExtrasNocturnas > 0) {
+                const salarioHorarioNocturno = salarioHorario * CONFIG.AUMENTO_HORA_NOCTURNA;
+                montoHorasExtrasNocturnas = salarioHorarioNocturno * datos.horasExtrasNocturnas * CONFIG.AUMENTO_HORA_EXTRA;
+            }
+
+            if (montoHorasExtrasDiurnas > 0) {
+                resultados.prestaciones.horasExtrasDiurnas = {
+                    monto: montoHorasExtrasDiurnas,
+                    baseLegal: 'Art. 169 CT',
+                    descripcion: 'Horas extras diurnas',
+                    detalles: `${datos.horasExtrasDiurnas} horas a ${CONFIG.AUMENTO_HORA_EXTRA}x`
+                };
+            }
+
+            if (montoHorasExtrasNocturnas > 0) {
+                resultados.prestaciones.horasExtrasNocturnas = {
+                    monto: montoHorasExtrasNocturnas,
+                    baseLegal: 'Arts. 168 y 169 CT',
+                    descripcion: 'Horas extras nocturnas',
+                    detalles: `${datos.horasExtrasNocturnas} horas a ${CONFIG.AUMENTO_HORA_NOCTURNA}x + ${CONFIG.AUMENTO_HORA_EXTRA}x`
+                };
+            }
+        }
+
+        function calcularAsueto(resultados, datos) {
+            const salarioDiario = resultados.salarioDiario;
+            const monto = salarioDiario * datos.diasAsueto * CONFIG.AUMENTO_ASUETO;
+
+            if (datos.diasAsueto > 0) {
+                resultados.prestaciones.asueto = {
+                    monto: monto,
+                    baseLegal: 'Art. 192 CT',
+                    descripcion: 'Días de asueto laborados',
+                    detalles: `${datos.diasAsueto} días a ${CONFIG.AUMENTO_ASUETO}x`
+                };
+            }
+        }
+
+        function calcularDescansoSemanal(resultados, datos) {
+            const salarioDiario = resultados.salarioDiario;
+            const monto = salarioDiario * datos.diasDescansoSemanal * CONFIG.AUMENTO_DESCANSO_SEMANAL;
+
+            if (datos.diasDescansoSemanal > 0) {
+                resultados.prestaciones.descansoSemanal = {
+                    monto: monto,
+                    baseLegal: 'Arts. 175 y 176 CT',
+                    descripcion: 'Días de descanso semanal laborados',
+                    detalles: `${datos.diasDescansoSemanal} días a ${CONFIG.AUMENTO_DESCANSO_SEMANAL}x`
+                };
+            }
+        }
+
+        function calcularTotales(resultados) {
+            let totalDevengado = 0;
+
+            // Sumar todas las prestaciones
+            for (let prestacion in resultados.prestaciones) {
+                totalDevengado += resultados.prestaciones[prestacion].monto;
+            }
+
+            // Calcular retenciones
+            // ISSS: 3% sobre remuneración gravada
+            const cotizacionISS = totalDevengado * CONFIG.TASA_ISSS;
+
+            // AFP: 7.25% sobre remuneración gravada
+            const cotizacionAFP = totalDevengado * CONFIG.TASA_AFP;
+
+            // ISR: solo sobre la remuneración que excede el mínimo exento
+            let retencionISR = 0;
+            const remuneracionGravada = Math.max(0, totalDevengado - CONFIG.SALARIO_MINIMO_ISR);
+            if (remuneracionGravada > 0) {
+                retencionISR = remuneracionGravada * 0.10; // 10% sobre lo que excede
+            }
+
+            const totalDeducciones = cotizacionISS + cotizacionAFP + retencionISR;
+            const montoNeto = totalDevengado - totalDeducciones;
+
+            resultados.totales = {
+                totalDevengado: totalDevengado,
+                cotizacionISS: cotizacionISS,
+                cotizacionAFP: cotizacionAFP,
+                retencionISR: retencionISR,
+                totalDeducciones: totalDeducciones,
+                montoNeto: montoNeto,
+                remuneracionGravada: remuneracionGravada
+            };
+        }
+
+        // UTILIDADES DEL FORMULARIO
+        function validarFormulario() {
+            const campos = [
+                'nombreTrabajador', 'dui', 'cargo', 'empresaNombre',
+                'salarioMensual', 'fechaIngreso', 'fechaTerminacion', 'causaTerminacion'
+            ];
+
+            for (let campo of campos) {
+                const elemento = document.getElementById(campo);
+                if (!elemento.value || elemento.value.trim() === '') {
+                    mostrarNotificacion(`El campo ${elemento.previousElementSibling.textContent} es requerido`, 'error');
+                    return false;
+                }
+            }
+
+            // Validar fechas
+            const fechaIngreso = new Date(document.getElementById('fechaIngreso').value);
+            const fechaTerminacion = new Date(document.getElementById('fechaTerminacion').value);
+
+            if (fechaIngreso >= fechaTerminacion) {
+                mostrarNotificacion('La fecha de terminación debe ser posterior a la de ingreso', 'error');
+                return false;
+            }
+
+            // Validar salario
+            const salario = parseFloat(document.getElementById('salarioMensual').value);
+            if (salario <= 0) {
+                mostrarNotificacion('El salario debe ser mayor a cero', 'error');
+                return false;
+            }
+
+            return true;
+        }
+
+        function obtenerDatosFormulario() {
+            return {
+                nombreTrabajador: document.getElementById('nombreTrabajador').value.trim(),
+                dui: document.getElementById('dui').value.trim(),
+                cargo: document.getElementById('cargo').value.trim(),
+                empresaNombre: document.getElementById('empresaNombre').value.trim(),
+                empresaTel: document.getElementById('empresaTel').value.trim(),
+                empresaEmail: document.getElementById('empresaEmail').value.trim(),
+                salarioMensual: parseFloat(document.getElementById('salarioMensual').value),
+                fechaIngreso: document.getElementById('fechaIngreso').value,
+                fechaTerminacion: document.getElementById('fechaTerminacion').value,
+                causaTerminacion: document.getElementById('causaTerminacion').value,
+                horasExtrasDiurnas: parseFloat(document.getElementById('horasExtrasDiurnas').value) || 0,
+                horasExtrasNocturnas: parseFloat(document.getElementById('horasExtrasNocturnas').value) || 0,
+                diasAsueto: parseFloat(document.getElementById('diasAsueto').value) || 0,
+                diasDescansoSemanal: parseFloat(document.getElementById('diasDescansoSemanal').value) || 0,
+                ultimoAguinaldo: document.getElementById('ultimoAguinaldo').value,
+                ultimasVacacionesDesde: document.getElementById('ultimasVacacionesDesde').value,
+                ultimasVacacionesHasta: document.getElementById('ultimasVacacionesHasta').value,
+                observaciones: document.getElementById('observaciones').value.trim()
+            };
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('nombreTrabajador').value = '';
+            document.getElementById('dui').value = '';
+            document.getElementById('cargo').value = '';
+            document.getElementById('empresaNombre').value = '';
+            document.getElementById('empresaTel').value = '';
+            document.getElementById('empresaEmail').value = '';
+            document.getElementById('salarioMensual').value = '';
+            document.getElementById('fechaIngreso').value = '';
+            document.getElementById('fechaTerminacion').value = '';
+            document.getElementById('causaTerminacion').value = '';
+            document.getElementById('horasExtrasDiurnas').value = '0';
+            document.getElementById('horasExtrasNocturnas').value = '0';
+            document.getElementById('diasAsueto').value = '0';
+            document.getElementById('diasDescansoSemanal').value = '0';
+            document.getElementById('ultimoAguinaldo').value = '';
+            document.getElementById('ultimasVacacionesDesde').value = '';
+            document.getElementById('ultimasVacacionesHasta').value = '';
+            document.getElementById('observaciones').value = '';
+            document.getElementById('resultsSection').style.display = 'none';
+            mostrarNotificacion('Formulario limpiado', 'success');
+        }
+
+        // MOSTRAR RESULTADOS
+        function mostrarResultados(resultados) {
+            // Mostrar sección de resultados
+            document.getElementById('resultsSection').style.display = 'block';
+
+            // Actualizar información de antiedad
+            const { años, meses, diasRestantes } = resultados.antiguedad;
+            let textoAntiguedad = `${años} años`;
+            if (meses > 0) textoAntiguedad += `, ${meses} meses`;
+            if (diasRestantes > 0) textoAntiguedad += `, ${diasRestantes} días`;
+            document.getElementById('antiguedadTexto').textContent = textoAntiguedad;
+
+            // Construir tabla de prestaciones
+            const cuerpoTabla = document.getElementById('cuerpoTabla');
+            cuerpoTabla.innerHTML = '';
+
+            const prestacionesOrdenadas = [
+                { clave: 'vacacionesProporcionales', nombre: 'Vacación proporcional' },
+                { clave: 'aguinaldoProporcional', nombre: 'Aguinaldo proporcional' },
+                { clave: 'indemnizacion', nombre: 'Indemnización' },
+                { clave: 'horasExtrasDiurnas', nombre: 'Horas extras diurnas' },
+                { clave: 'horasExtrasNocturnas', nombre: 'Horas extras nocturnas' },
+                { clave: 'asueto', nombre: 'Días de asueto laborados' },
+                { clave: 'descansoSemanal', nombre: 'Días de descanso semanal laborados' }
+            ];
+
+            for (let item of prestacionesOrdenadas) {
+                if (resultados.prestaciones[item.clave]) {
+                    const prestacion = resultados.prestaciones[item.clave];
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td><strong>${prestacion.descripcion}</strong></td>
+                        <td>${prestacion.baseLegal}</td>
+                        <td class="text-right amount">${formatoMoneda(prestacion.monto)}</td>
+                    `;
+                    cuerpoTabla.appendChild(fila);
+                }
+            }
+
+            // Fila de total devengado
+            const filaTotal = document.createElement('tr');
+            filaTotal.style.background = '#e0e7ff';
+            filaTotal.style.fontWeight = 'bold';
+            filaTotal.innerHTML = `
+                <td colspan="2">TOTAL DEVENGADO (BRUTO)</td>
+                <td class="text-right amount-highlight">${formatoMoneda(resultados.totales.totalDevengado)}</td>
+            `;
+            cuerpoTabla.appendChild(filaTotal);
+
+            // Actualizar resumen financiero
+            document.getElementById('totalDevengado').textContent = formatoMoneda(resultados.totales.totalDevengado);
+            document.getElementById('cotizacionISS').textContent = formatoMoneda(resultados.totales.cotizacionISS);
+            document.getElementById('cotizacionAFP').textContent = formatoMoneda(resultados.totales.cotizacionAFP);
+            document.getElementById('retencionISR').textContent = formatoMoneda(resultados.totales.retencionISR);
+            document.getElementById('totalDeducciones').textContent = formatoMoneda(resultados.totales.totalDeducciones);
+            document.getElementById('montoNeto').textContent = formatoMoneda(resultados.totales.montoNeto);
+
+            // Guardar resultados en variable global para exportación
+            window.ultimosResultados = resultados;
+
+            // Scroll a resultados
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // EXPORTACIÓN E IMPRESIÓN
+        function exportarPDF() {
+            if (!window.ultimosResultados) {
+                mostrarNotificacion('No hay resultados para exportar', 'warning');
+                return;
+            }
+
+            const resultados = window.ultimosResultados;
+            const html = generarHTMLPDF(resultados);
+
+            // Crear elemento temporal
+            const elemento = document.createElement('div');
+            elemento.innerHTML = html;
+            elemento.style.position = 'fixed';
+            elemento.style.left = '-9999px';
+            elemento.style.top = '-9999px';
+            document.body.appendChild(elemento);
+
+            // Usar html2pdf si está disponible, si no, usar método alternativo
+            if (typeof html2pdf !== 'undefined') {
+                html2pdf().set({
+                    margin: 10,
+                    filename: `Liquidacion_${resultados.trabajador.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { orientation: 'portrait', unit: 'mm', format: 'letter' }
+                }).save();
+            } else {
+                // Fallback: imprimir y el usuario guarda como PDF
+                imprimirResultados();
+            }
+
+            document.body.removeChild(elemento);
+        }
+
+        function imprimirResultados() {
+            if (!window.ultimosResultados) {
+                mostrarNotificacion('No hay resultados para imprimir', 'warning');
+                return;
+            }
+
+            const resultados = window.ultimosResultados;
+            const html = generarHTMLPDF(resultados);
+
+            const ventanaImpresion = window.open('', '_blank');
+            ventanaImpresion.document.write(html);
+            ventanaImpresion.document.close();
+
+            ventanaImpresion.onload = function() {
+                ventanaImpresion.print();
+            };
+        }
+
+        function generarHTMLPDF(resultados) {
+            const { años, meses, diasRestantes } = resultados.antiguedad;
+            let textoAntiguedad = `${años} años`;
+            if (meses > 0) textoAntiguedad += `, ${meses} meses`;
+            if (diasRestantes > 0) textoAntiguedad += `, ${diasRestantes} días`;
+
+            let filasPrestaciones = '';
+            const prestacionesOrdenadas = [
+                { clave: 'vacacionesProporcionales', nombre: 'Vacación proporcional' },
+                { clave: 'aguinaldoProporcional', nombre: 'Aguinaldo proporcional' },
+                { clave: 'indemnizacion', nombre: 'Indemnización' },
+                { clave: 'horasExtrasDiurnas', nombre: 'Horas extras diurnas' },
+                { clave: 'horasExtrasNocturnas', nombre: 'Horas extras nocturnas' },
+                { clave: 'asueto', nombre: 'Días de asueto laborados' },
+                { clave: 'descansoSemanal', nombre: 'Días de descanso semanal laborados' }
+            ];
+
+            for (let item of prestacionesOrdenadas) {
+                if (resultados.prestaciones[item.clave]) {
+                    const prestacion = resultados.prestaciones[item.clave];
+                    filasPrestaciones += `
+                        <tr>
+                            <td>${prestacion.descripcion}</td>
+                            <td>${prestacion.baseLegal}</td>
+                            <td style="text-align: right; font-weight: 600;">${formatoMoneda(prestacion.monto)}</td>
+                        </tr>
+                    `;
+                }
+            }
+
+            return `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Comprobante de Liquidación de Prestaciones Laborales</title>
+                    <style>
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 20px;
+                            color: #1e293b;
+                            line-height: 1.6;
+                        }
+                        .container {
+                            max-width: 8.5in;
+                            margin: 0 auto;
+                            padding: 20px;
+                            background: white;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 25px;
+                            padding-bottom: 15px;
+                            border-bottom: 2px solid #000;
+                        }
+                        .header-title {
+                            font-size: 14px;
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                        }
+                        .header-subtitle {
+                            font-size: 12px;
+                            margin-bottom: 3px;
+                        }
+                        .section {
+                            margin-bottom: 20px;
+                        }
+                        .section-title {
+                            font-size: 11px;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                            text-decoration: underline;
+                            text-transform: uppercase;
+                        }
+                        .data-grid {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 10px;
+                            font-size: 11px;
+                            margin-bottom: 15px;
+                        }
+                        .data-item {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                        .data-label {
+                            font-weight: bold;
+                            font-size: 10px;
+                        }
+                        .data-value {
+                            font-size: 11px;
+                            padding: 4px 0;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 15px;
+                            font-size: 10px;
+                        }
+                        table th {
+                            background: #1e3a8a;
+                            color: white;
+                            padding: 8px;
+                            text-align: left;
+                            font-weight: bold;
+                            border: 1px solid #000;
+                        }
+                        table td {
+                            padding: 8px;
+                            border: 1px solid #ddd;
+                        }
+                        table tbody tr:last-child {
+                            background: #e0e7ff;
+                            font-weight: bold;
+                        }
+                        .summary-section {
+                            margin-top: 20px;
+                            padding: 15px;
+                            background: #f8fafc;
+                            border: 1px solid #cbd5e1;
+                            border-radius: 4px;
+                            font-size: 10px;
+                        }
+                        .summary-row {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 6px 0;
+                            border-bottom: 1px solid #e0e7ff;
+                        }
+                        .summary-row:last-child {
+                            border-bottom: none;
+                            font-weight: bold;
+                            font-size: 12px;
+                            padding: 12px 0;
+                            margin-top: 10px;
+                            border-top: 2px solid #1e3a8a;
+                        }
+                        .summary-row.total-devengado {
+                            background: #e0e7ff;
+                            font-weight: bold;
+                            margin: 10px 0;
+                        }
+                        .disclaimer {
+                            font-size: 9px;
+                            background: #fef3c7;
+                            padding: 12px;
+                            border-left: 4px solid #ea580c;
+                            margin-top: 20px;
+                            line-height: 1.4;
+                        }
+                        .declaration {
+                            margin-top: 20px;
+                            font-size: 10px;
+                        }
+                        .signatures {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 30px;
+                            margin-top: 40px;
+                            font-size: 10px;
+                        }
+                        .signature-block {
+                            text-align: center;
+                        }
+                        .signature-line {
+                            border-top: 1px solid #000;
+                            margin-top: 40px;
+                            margin-bottom: 5px;
+                        }
+                        @media print {
+                            body { padding: 0; }
+                            .container { padding: 0; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <div class="header-title">COMPROBANTE DE LIQUIDACION DE PRESTACIONES LABORALES</div>
+                            <div class="header-subtitle">Republica de El Salvador</div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">I. Datos de las Partes</div>
+                            <div class="data-grid">
+                                <div class="data-item">
+                                    <span class="data-label">Persona Trabajadora</span>
+                                    <span class="data-value">${resultados.trabajador}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Patrono</span>
+                                    <span class="data-value">${resultados.empresa}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">DUI</span>
+                                    <span class="data-value">${resultados.dui}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Cargo Desempenado</span>
+                                    <span class="data-value">${resultados.cargo}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Fecha de Ingreso</span>
+                                    <span class="data-value">${formatearFecha(resultados.fechaIngreso)}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Salario Mensual</span>
+                                    <span class="data-value">${formatoMoneda(resultados.salarioMensual)}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Fecha de Terminacion</span>
+                                    <span class="data-value">${formatearFecha(resultados.fechaTerminacion)}</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Antiguedad Reconocida</span>
+                                    <span class="data-value">${textoAntiguedad}</span>
+                                </div>
+                                <div class="data-item" style="grid-column: 1 / -1;">
+                                    <span class="data-label">Causa de Terminacion</span>
+                                    <span class="data-value">${obtenerTextoTerminacion(resultados.causaTerminacion)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">II. Desglose de Prestaciones Liquidadas</div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Concepto</th>
+                                        <th>Base Legal</th>
+                                        <th style="text-align: right;">Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${filasPrestaciones}
+                                    <tr>
+                                        <td colspan="2"><strong>TOTAL DEVENGADO (BRUTO)</strong></td>
+                                        <td style="text-align: right; font-weight: bold;">${formatoMoneda(resultados.totales.totalDevengado)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">III. Deducciones de Ley y Neto a Pagar</div>
+                            <div class="summary-section">
+                                <div class="summary-row">
+                                    <span>Remuneracion Gravada:</span>
+                                    <span>${formatoMoneda(resultados.totales.remuneracionGravada)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Monto Exento de ISR y de Cotizaciones:</span>
+                                    <span>${formatoMoneda(resultados.totales.totalDevengado - resultados.totales.remuneracionGravada)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Cotizacion ISSS (Trabajador)</span>
+                                    <span>-${formatoMoneda(resultados.totales.cotizacionISS)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Cotizacion AFP (Trabajador)</span>
+                                    <span>-${formatoMoneda(resultados.totales.cotizacionAFP)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Retencion de ISR</span>
+                                    <span>-${formatoMoneda(resultados.totales.retencionISR)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span><strong>Total de Deducciones</strong></span>
+                                    <span><strong>-${formatoMoneda(resultados.totales.totalDeducciones)}</strong></span>
+                                </div>
+                                <div class="summary-row">
+                                    <span><strong>MONTO NETO A PAGAR</strong></span>
+                                    <span><strong>${formatoMoneda(resultados.totales.montoNeto)}</strong></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="declaration">
+                                <strong>Monto neto en letras:</strong><br>
+                                ${numeroALetras(Math.floor(resultados.totales.montoNeto))} ${((resultados.totales.montoNeto % 1) * 100).toFixed(0)}/100 DOLARES DE LOS ESTADOS UNIDOS DE AMERICA
+                            </div>
+                        </div>
+
+                        <div class="disclaimer">
+                            <strong>Advertencia Legal:</strong> Este documento es un comprobante informativo del calculo de prestaciones y NO constituye el finiquito laboral. Conforme al Art. 402 inciso 2 del Codigo de Trabajo, la renuncia, la terminacion por mutuo consentimiento o el recibo de pago de prestaciones por despido sin causa legal solo tienen valor probatorio si constan en hojas extendidas por la Direccion General de Inspeccion de Trabajo o por los jueces con competencia en materia laboral, utilizadas dentro de los diez dias siguientes a su expedicion, o bien en documento privado autenticado ante notario. Se recomienda asesoria legal profesional antes de suscribir cualquier finiquito.
+                        </div>
+
+                        <div class="signatures">
+                            <div class="signature-block">
+                                <p>Persona Trabajadora</p>
+                                <p style="font-size: 9px; margin-top: 5px;">Nombre: _________________________</p>
+                                <p style="font-size: 9px; margin: 3px 0;">DUI: _________________________</p>
+                                <div class="signature-line"></div>
+                                <p style="font-size: 9px; margin-top: 5px;">Fecha: _________________________</p>
+                            </div>
+                            <div class="signature-block">
+                                <p>Patrono o Representante Legal</p>
+                                <p style="font-size: 9px; margin-top: 5px;">Nombre: _________________________</p>
+                                <p style="font-size: 9px; margin: 3px 0;">DUI: _________________________</p>
+                                <div class="signature-line"></div>
+                                <p style="font-size: 9px; margin-top: 5px;">Fecha: _________________________</p>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px; font-size: 9px; color: #64748b;">
+                            Generado el ${new Date().toLocaleString('es-SV')}
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+        }
+
+        function formatearFecha(fecha) {
+            if (!fecha) return '';
+            const date = new Date(fecha);
+            const dias = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+                          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            return `${date.getDate()} de ${meses[date.getMonth()]} de ${date.getFullYear()}`;
+        }
+
+        function obtenerTextoTerminacion(causa) {
+            const textos = {
+                'despido': 'Despido sin causa justificada',
+                'renuncia': 'Renuncia voluntaria',
+                'mutual': 'Mutuo consentimiento',
+                'jubilacion': 'Jubilacion',
+                'muerte': 'Por causa de muerte'
+            };
+            return textos[causa] || causa;
+        }
+
+        function numeroALetras(num) {
+            const unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+            const decenas = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciseis', 'diecisiete', 'dieciocho', 'diecinueve'];
+            const multdecenas = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+            const centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+            if (num === 0) return 'cero';
+            if (num < 0) return 'menos ' + numeroALetras(-num);
+
+            if (num < 10) return unidades[num];
+            if (num < 20) return decenas[num - 10];
+            if (num < 100) {
+                return multdecenas[Math.floor(num / 10)] + (num % 10 !== 0 ? ' y ' + unidades[num % 10] : '');
+            }
+            if (num < 1000) {
+                return centenas[Math.floor(num / 100)] + (num % 100 !== 0 ? ' ' + numeroALetras(num % 100) : '');
+            }
+            if (num < 1000000) {
+                return numeroALetras(Math.floor(num / 1000)) + ' mil' + (num % 1000 !== 0 ? ' ' + numeroALetras(num % 1000) : '');
+            }
+            return '';
+        }
+
+        // NOTIFICACIONES
+        function mostrarNotificacion(mensaje, tipo = 'info') {
+            const notificacion = document.createElement('div');
+            notificacion.className = `notification ${tipo}`;
+            notificacion.textContent = mensaje;
+            document.body.appendChild(notificacion);
+
+            setTimeout(() => {
+                notificacion.remove();
+            }, 5000);
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Aplicación de Liquidación de Prestaciones Laborales lista');
+        });
+    </script>
+</body>
+</html>
